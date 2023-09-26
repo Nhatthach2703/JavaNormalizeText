@@ -13,30 +13,19 @@ import java.util.regex.Pattern;
  */
 public class Text {
     public String normalizeText(String input) {
-        String[] lines = input.split("\n");
+        String[] sentences = input.split("(?<=[.!?])\\s+");
 
-        StringBuilder str = new StringBuilder();
+        StringBuilder normalizedText = new StringBuilder();
 
-        boolean isFirstLine = true;
-
-        for (String line : lines) {
-            line = line.trim();
-
-            if (!line.isEmpty()) {
-                if (!isFirstLine) {
-                    str.append(" ");
-                }
-
-                line = normalizeLine(line);
-
-                str.append(line);
-                isFirstLine = false;
+        for (String sentence : sentences) {
+            sentence = sentence.trim();
+            if (!sentence.isEmpty()) {
+                sentence = normalizeLine(sentence);
+                normalizedText.append(sentence).append(" ");
             }
         }
 
-        str.append(".");
-
-        return str.toString();
+        return normalizedText.toString().trim() + ".";
     }
 
     private String normalizeLine(String line) {
@@ -54,7 +43,7 @@ public class Text {
     }
 
     private String capitalizeFirstCharacter(String line) {
-        Pattern pattern = Pattern.compile("(^|\\.[\\s\"])([a-z])");
+        Pattern pattern = Pattern.compile("(^|[.!?]\\s+|\"\\s+)([a-z])");
         Matcher matcher = pattern.matcher(line);
 
         StringBuffer result = new StringBuffer();

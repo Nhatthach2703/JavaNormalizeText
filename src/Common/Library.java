@@ -41,15 +41,15 @@ public class Library {
         return a;
     }
 
-    public String inputString() {
-        while (true) {
-            String result = sc.nextLine().trim();
-            if (result.isEmpty()) {
-                System.err.println("Not empty!");
-                System.out.print("Enter again: ");
-            } else {
-                return result;
-            }
-        }
-    }
+//    public String inputString() {
+//        while (true) {
+//            String result = sc.nextLine().trim();
+//            if (result.isEmpty()) {
+//                System.err.println("Not empty!");
+//                System.out.print("Enter again: ");
+//            } else {
+//                return result;
+//            }
+//        }
+//    }
 }
